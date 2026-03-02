@@ -1,38 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bharath Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharath S | Portfolio</title>
+
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4f6f9;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
-        .container {
-            text-align: center;
-            padding: 40px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        body {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
         }
 
-        h1 {
-            color: #2c3e50;
-            font-size: 40px;
+        header {
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
         }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #ff9800;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn:hover {
+            background: #e68900;
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-box {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 20px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .skills {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>I'm Bharath S</h1>
+    <header>
+        Bharath S
+    </header>
+
+    <div class="hero">
+        <h1>Hi, I'm Bharath S 👋</h1>
+        <p>CSE Student | Cloud Enthusiast | Future AI Developer</p>
+        <a href="#about" class="btn">About Me</a>
     </div>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p style="margin-top:15px;">
+            I am a Computer Science Engineering student passionate about Web Development,
+            Cloud Computing, and Artificial Intelligence. I love building projects
+            and learning new technologies.
+        </p>
+    </section>
+
+    <section>
+        <h2>My Skills</h2>
+        <div class="skills">
+            <div class="skill-box">HTML</div>
+            <div class="skill-box">CSS</div>
+            <div class="skill-box">JavaScript</div>
+            <div class="skill-box">React</div>
+            <div class="skill-box">Cloud</div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Bharath S | All Rights Reserved
+    </footer>
 
 </body>
 </html>
