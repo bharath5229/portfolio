@@ -73,14 +73,59 @@
   .nav-links a:hover { color: var(--accent); }
   .hamburger {
     display: none; flex-direction: column; gap: 5px;
-    cursor: none; background: none; border: none; padding: 4px;
+    cursor: pointer; background: none; border: none; padding: 4px;
   }
   .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; display: block; transition: 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--accent); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--accent); }
   .hero {
     min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: row; align-items: center; justify-content: space-between;
+    gap: 48px;
     padding: 120px 5% 80px;
     position: relative; z-index: 1;
+  }
+  .hero-content { flex: 1; min-width: 0; }
+  .hero-photo-wrap {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+  .hero-photo-ring {
+    position: relative;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--accent), rgba(0,212,255,0.2), var(--accent2));
+    box-shadow: 0 0 32px rgba(0,212,255,0.25), 0 0 60px rgba(0,212,255,0.08);
+  }
+  .hero-photo-ring::before {
+    content: '';
+    position: absolute; inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,212,255,0.18);
+    animation: spinRing 8s linear infinite;
+  }
+  .hero-photo-ring::after {
+    content: '';
+    position: absolute; inset: -12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,212,255,0.08);
+    animation: spinRing 14s linear infinite reverse;
+  }
+  @keyframes spinRing { to { transform: rotate(360deg); } }
+  .hero-photo {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover; object-position: top center;
+    background: var(--surface2);
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .hero { flex-direction: column-reverse; align-items: flex-start; padding-top: 100px; }
+    .hero-photo-ring { width: 130px; height: 130px; }
+    .hero-photo-wrap { align-self: center; }
   }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px;
@@ -246,8 +291,9 @@
   }
   .social-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(0,212,255,0.05); }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-  .reveal { opacity: 0; transform: translateY(22px); transition: all 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal { opacity: 1; transform: translateY(0); transition: all 0.6s ease; }
+  .js-loaded .reveal { opacity: 0; transform: translateY(22px); }
+  .js-loaded .reveal.visible { opacity: 1; transform: translateY(0); }
   .note { margin-top: 18px; font-size: 0.7rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
 
   @media (max-width: 900px) {
@@ -297,22 +343,29 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-tag"><span class="blink">▶</span> Available for Internships &amp; Opportunities</div>
-  <h1>Bharath <span class="accent">S</span></h1>
-  <div class="hero-role">Cloud &amp; Backend Developer · Chennai, India</div>
-  <p class="hero-desc">
-    Pre-final year CS Engineering student passionate about AWS Cloud &amp; backend development.
-    Building scalable applications with EC2, S3, IAM, Docker, and Kubernetes.
-  </p>
-  <div class="hero-ctas">
-    <button class="btn btn-primary" onclick="downloadResume()">⬇ Download Resume</button>
-    <a href="#projects" class="btn btn-outline">View Projects →</a>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="blink">▶</span> Available for Internships &amp; Opportunities</div>
+    <h1>Bharath <span class="accent">S</span></h1>
+    <div class="hero-role">Cloud &amp; Backend Developer · Chennai, India</div>
+    <p class="hero-desc">
+      Pre-final year CS Engineering student passionate about AWS Cloud &amp; backend development.
+      Building scalable applications with EC2, S3, IAM, Docker, and Kubernetes.
+    </p>
+    <div class="hero-ctas">
+      <button class="btn btn-primary" onclick="downloadResume()">⬇ Download Resume</button>
+      <a href="#projects" class="btn btn-outline">View Projects →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">8.67</div><div class="stat-label">CGPA</div></div>
+      <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
+      <div class="stat"><div class="stat-num">13+</div><div class="stat-label">Certifications</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Internships</div></div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">8.67</div><div class="stat-label">CGPA</div></div>
-    <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Projects</div></div>
-    <div class="stat"><div class="stat-num">13+</div><div class="stat-label">Certifications</div></div>
-    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Internships</div></div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-ring">
+      <img src="bharath-photo.png" alt="Bharath S" class="hero-photo" />
+    </div>
   </div>
 </section>
 
@@ -483,7 +536,7 @@
     <div class="contact-info">
       <h2>Let's Connect</h2>
       <div class="contact-links">
-        <a href="mailto:bharathsureshbabu22@gmail.com" class="contact-link">✉ bharathsureshbabu22@gmail.com</a>
+        <a href="https://mail.google.com/mail/?view=cm&amp;to=bharathsureshbabu22@gmail.com" target="_blank" rel="noopener" class="contact-link">✉ bharathsureshbabu22@gmail.com</a>
         <a href="tel:+919894165229" class="contact-link">📞 +91 98941 65229</a>
       </div>
     </div>
@@ -524,7 +577,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Cursor
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
@@ -576,18 +629,32 @@ for(let i=0;i<55;i++) flakes.push({
 })();
 
 // Scroll reveal
+document.body.classList.add('js-loaded');
 const reveals=document.querySelectorAll('.reveal');
+// Immediately show anything already in viewport
+reveals.forEach(el=>{
+  const rect=el.getBoundingClientRect();
+  if(rect.top < window.innerHeight) el.classList.add('visible');
+});
 const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*90);obs.unobserve(e.target);}
   });
-},{threshold:0.08});
-reveals.forEach(el=>obs.observe(el));
+},{threshold:0.05, rootMargin:'0px 0px -30px 0px'});
+reveals.forEach(el=>{ if(!el.classList.contains('visible')) obs.observe(el); });
 
 // Mobile nav
-function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
+function toggleNav(){
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('active');
+}
 document.querySelectorAll('.nav-links a').forEach(a=>
-  a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open'))
+  a.addEventListener('click',()=>{
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+  })
 );
 
 // Download resume - fetches the PDF blob and triggers download
@@ -599,13 +666,3 @@ async function downloadResume(){
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');
     a.href=url; a.download='Bharath_S_Resume.pdf';
-    document.body.appendChild(a); a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  } catch(e){
-    alert('Resume PDF not found. Make sure BharathS-Resume.pdf is in the same folder as this HTML file.');
-  }
-}
-</script>
-</body>
-</html>
